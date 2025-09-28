@@ -1,6 +1,6 @@
 """Entry point for running awsome as a module."""
 
-from awsome.main import start
+from awsome.cli import cli
 
 if __name__ == "__main__":
-    start()
+    cli()

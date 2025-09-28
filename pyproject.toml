@@ -23,6 +23,7 @@ classifiers = [
 
 dependencies = [
     "boto3>=1.40.40",
+    "click>=8.3.0",
     "textual>=6.1.0",
 ]
 
@@ -40,7 +41,7 @@ dev = [
 ]
 
 [project.scripts]
-awsome = "awsome.main:start"
+awsome = "awsome.cli:cli"
 
 [build-system]
 requires = ["hatchling"]
