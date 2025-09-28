@@ -44,10 +44,10 @@ jobs:
 
       - name: Run tests with pytest
         run: |
-          uv run pytest tests --cov=src/awsome --cov-report=term-missing --cov-report=xml
+          uv run pytest tests --cov=src/awsome --cov-report=term-missing --cov-report=xml --cov-branch
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         if: matrix.python-version == '3.12'
         with:
           file: ./coverage.xml
