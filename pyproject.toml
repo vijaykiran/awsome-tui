@@ -4,4 +4,122 @@ version = "0.1.0"
 description = "AWSome AWS App"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+authors = [
+    {name = "Vijay Kiran", email = "mail@vijaykiran.com"}
+]
+keywords = ["aws", "tui", "terminal", "textual", "cloud"]
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+dependencies = [
+    "boto3>=1.40.40",
+    "textual>=6.1.0",
+]
+
+
+[dependency-groups]
+dev = [
+    "black>=25.9.0",
+    "coverage>=7.10.7",
+    "mypy>=1.18.2",
+    "pytest>=8.4.2",
+    "pytest-asyncio>=1.2.0",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.13.2",
+    "textual-dev>=1.7.0",
+]
+
+[project.scripts]
+awsome = "awsome.main:start"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/awsome"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+indent-width = 4
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "UP", "B", "SIM", "I"]
+ignore = ["E501"]
+
+[tool.black]
+line-length = 100
+target-version = ['py312']
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_any_unimported = true
+no_implicit_optional = true
+check_untyped_defs = true
+warn_unused_ignores = true
+show_error_codes = true
+mypy_path = "src"
+
+[[tool.mypy.overrides]]
+module = [
+    "aioboto3.*",
+    "boto3.*",
+    "botocore.*",
+    "watchfiles.*",
+    "tenacity.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = [
+    "--verbose",
+    "--cov=src/awsome_tui",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml",
+    "--cov-config=.coveragerc",
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "*/tests/*",
+    "*/__pycache__/*",
+    "*/test_*.py",
+    "*/.venv/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "@abstractmethod",
+]
+precision = 2
+show_missing = true
+
+[tool.coverage.html]
+directory = "htmlcov"
+title = "AWSome Coverage Report"
