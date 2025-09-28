@@ -1,4 +1,3 @@
-
 import click
 
 from awsome.main import AWSomeApp

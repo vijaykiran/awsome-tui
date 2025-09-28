@@ -52,7 +52,7 @@ echo
 
 # Run Ruff linter
 print_step "Running Ruff linter..."
-if uv run ruff check --fix src tests; then
+if uv run ruff check src tests; then
     print_success "Ruff linting passed"
 else
     print_error "Ruff linting failed"
