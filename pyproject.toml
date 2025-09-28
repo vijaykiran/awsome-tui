@@ -77,7 +77,6 @@ mypy_path = "src"
 
 [[tool.mypy.overrides]]
 module = [
-    "aioboto3.*",
     "boto3.*",
     "botocore.*",
     "watchfiles.*",
