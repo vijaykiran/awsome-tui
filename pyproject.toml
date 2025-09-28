@@ -90,7 +90,7 @@ asyncio_mode = "auto"
 testpaths = ["tests"]
 addopts = [
     "--verbose",
-    "--cov=src/awsome_tui",
+    "--cov=src/awsome",
     "--cov-report=term-missing",
     "--cov-report=html",
     "--cov-report=xml",
