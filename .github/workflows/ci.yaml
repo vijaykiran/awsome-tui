@@ -44,7 +44,7 @@ jobs:
 
       - name: Run tests with pytest
         run: |
-          uv run pytest tests --cov=src/awsome --cov-report=term-missing --cov-report=xml --cov-branch
+          uv run pytest tests --cov=src/awsome --cov-report=term-missing --cov-report=xml --cov-branch --junitxml=junit.xml -o junit_family=legacy
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
@@ -53,4 +53,10 @@ jobs:
           flags: unittests
           name: codecov-umbrella
           fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Upload Upload test results to Codecov
+        uses: codecov/test-results-action@v1
+        if: matrix.python-version == '3.12'
+        with:
           token: ${{ secrets.CODECOV_TOKEN }}
